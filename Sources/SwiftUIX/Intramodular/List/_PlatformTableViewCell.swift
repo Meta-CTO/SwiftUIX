@@ -19,7 +19,7 @@ public class _PlatformTableViewCell<ItemType: Identifiable, Content: View>: UITa
     var indexPath: IndexPath?
     
     var item: ItemType!
-    var makeContent: ((ItemType) -> Content)!
+    var makeContent: ((ItemType, IndexPath) -> Content)!
     
     var state: State {
         .init(
@@ -150,7 +150,7 @@ extension _PlatformTableViewCell {
         ) {
             self._cellProxyBase = .init(base: base)
             self.id = base.item.id
-            self.content = base.makeContent(base.item)
+            self.content = base.makeContent(base.item, base.indexPath!)
             self.state = base.state
         }
         

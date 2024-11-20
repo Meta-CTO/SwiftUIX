@@ -25,7 +25,7 @@ public class _PlatformTableViewController<SectionModel: Identifiable, ItemType: 
     
     var sectionHeader: (SectionModel) -> SectionHeader
     var sectionFooter: (SectionModel) -> SectionFooter
-    var rowContent: (ItemType) -> RowContent
+    var rowContent: (ItemType, IndexPath) -> RowContent
     
     var scrollViewConfiguration: CocoaScrollViewConfiguration<AnyView> = nil {
         didSet {
@@ -127,7 +127,7 @@ public class _PlatformTableViewController<SectionModel: Identifiable, ItemType: 
         style: UITableView.Style,
         sectionHeader: @escaping (SectionModel) -> SectionHeader,
         sectionFooter: @escaping (SectionModel) -> SectionFooter,
-        rowContent: @escaping (ItemType) -> RowContent
+        rowContent: @escaping (ItemType, IndexPath) -> RowContent
     ) {
         self.data = data
         self.sectionHeader = sectionHeader
@@ -300,6 +300,7 @@ public class _PlatformTableViewController<SectionModel: Identifiable, ItemType: 
         }
         
         prototypeCell.tableViewController = self
+        prototypeCell.indexPath = indexPath
         prototypeCell.item = data[indexPath]
         prototypeCell.makeContent = rowContent
         

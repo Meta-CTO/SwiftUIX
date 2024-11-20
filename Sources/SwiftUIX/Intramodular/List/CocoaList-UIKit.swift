@@ -27,7 +27,7 @@ public struct CocoaList<
     @usableFromInline
     let sectionFooter: (SectionType) -> SectionFooter
     @usableFromInline
-    let rowContent: (ItemType) -> RowContent
+    let rowContent: (ItemType, IndexPath) -> RowContent
     
     @usableFromInline
     var style: UITableView.Style = .plain
@@ -46,7 +46,7 @@ public struct CocoaList<
         _ data: Data,
         sectionHeader: @escaping (SectionType) -> SectionHeader,
         sectionFooter: @escaping (SectionType) -> SectionFooter,
-        rowContent: @escaping (ItemType) -> RowContent
+        rowContent: @escaping (ItemType, IndexPath) -> RowContent
     ) {
         self.data = data
         self.sectionHeader = sectionHeader
